@@ -37,7 +37,7 @@ class ClientFactory extends Factory
             'sex' => rand(1, 10) % 2 == 0 ? 'm' : 'f',
             'marital_status' => rand(1, 3),
             'physical_disability' => rand(1, 10) % 2 == 0 ? $this->faker->word() : null,
-            'client_type' => Client::TYPE_INDIVIDUAL
+            'client_type' => Client::TYPE_INDIVIDUAL,
         ]);
     }
 
@@ -49,6 +49,13 @@ class ClientFactory extends Factory
             'document_number' => $cnpjs[array_rand($cnpjs, 1)],
             'company_name' => $this->faker->company(),
             'client_type' => Client::TYPE_LEGAL
+        ]);
+    }
+
+    public function client()
+    {
+        return $this->state([
+            'field' => $this->faker->name()
         ]);
     }
 }
