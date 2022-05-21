@@ -17,12 +17,16 @@ class ClientProfilesTableSeeder extends Seeder
     public function run()
     {
         $clients = Client::all();
-        $countClients = $clients->count(); 
-
-        $collectionIndividual = ClientProfile::factory($countClients)->make();
-        $collectionIndividual->each(function ($clientProfile) use ($clients) {
-            $clientProfile->client_id = $clients->random()->id;
-            $clientProfile->save();
+        $clients->each(function ($client) {
+            $clientProfile = ClientProfile::factory()->make();
+            $client->clientProfile()->create($clientProfile->toArray());
         });
+        // $countClients = $clients->count(); 
+
+        // $collectionIndividual = ClientProfile::factory($countClients)->make();
+        // $collectionIndividual->each(function ($clientProfile) use ($clients) {
+        //     $clientProfile->client_id = $clients->random()->id;
+        //     $clientProfile->save();
+        // });
     }
 }

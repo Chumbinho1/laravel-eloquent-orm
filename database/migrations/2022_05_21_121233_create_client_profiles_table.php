@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('client_profiles', function (Blueprint $table) {
             $table->id();
             $table->string('field');
-            $table->integer('client_id')->unsigned();
+            $table->integer('client_id')->unsigned()->unique();
             $table->foreign('client_id')->references('id')->on('clients');
             $table->timestamps();
         });
